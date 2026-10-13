@@ -6,7 +6,7 @@ const errors=[];page.on('pageerror',e=>errors.push(e.message));
 try {
  await page.goto('https://savusavu.github.io/game/',{waitUntil:'networkidle'});
  for(const name of ['index.html','app.js','engine.js','style.css','coop.js']){
-  const bytes=await page.evaluate(async name=>Array.from(new Uint8Array(await (await fetch('./'+name)).arrayBuffer())),name);
+  const bytes=await page.evaluate(async name=>Array.from(new Uint8Array(await (await fetch('./'+name+'?verify='+Date.now())).arrayBuffer())),name);
   if(!Buffer.from(bytes).equals(readFileSync(new URL(name,import.meta.url))))throw Error('Asset mismatch '+name);
  }
  console.log('Five public assets byte-identical to tested commit');
