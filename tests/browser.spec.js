@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }) => { await page.goto('/'); await page.evaluate(
 test('onboarding offers six beginnings and starts selected identity', async ({ page }) => {
   await page.goto('/'); await expect(page.locator('[data-reason]')).toHaveCount(6);
   await page.getByRole('button', { name:'Rediscover joy' }).click();
-  await expect(page.locator('#reason-label')).toHaveText('Rediscover joy');
+  await expect(page.locator('#reason-label')).toHaveText('Rediscover joy'); await expect(page.locator('#onboarding')).toBeHidden();
   await expect(page.locator('#walker')).toHaveAttribute('data-walking','true');
 });
 
